@@ -1,0 +1,52 @@
+{
+  "cars": [
+    {
+      "logo": "/assets/logo/toyota.svg",
+      "name": "Toyota",
+      "desc": "Jeep Grand Cherokee",
+      "models": "1200 Models",
+      "status": true,
+      "id": 1
+    },
+    {
+      "logo": "/assets/logo/bmw.svg",
+      "name": "BMW",
+      "desc": "Brand description too long...",
+      "models": "800 Models",
+      "status": false,
+      "id": 2
+    },
+    {
+      "logo": "/assets/logo/mazda.svg",
+      "name": "Mazda",
+      "desc": "Audi Q7",
+      "models": "620 Models",
+      "status": true,
+      "id": 3
+    },
+    {
+      "logo": "/assets/logo/hyundai.svg",
+      "name": "Hyundai",
+      "desc": "Brand description too long...",
+      "models": "4260 Models",
+      "status": false,
+      "id": 4
+    },
+    {
+      "logo": "/assets/logo/kia.svg",
+      "name": "KIA",
+      "desc": "Dodge Charger",
+      "models": "620 Models",
+      "status": true,
+      "id": 5
+    },
+    {
+      "logo": "/assets/logo/nissan.svg",
+      "name": "Nissan",
+      "desc": "Brand description too long...",
+      "models": "4260 Models",
+      "status": false,
+      "id": 6
+    }
+  ]
+}

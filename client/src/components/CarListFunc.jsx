@@ -1,9 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 
 import { Link } from 'react-router-dom';
+import AddCars from './AddCars';
 
 const CarListFunc = () => {
   return (
@@ -54,9 +54,7 @@ const CarListFunc = () => {
 
       {/* Button */}
       <Box>
-        <Button variant="contained" color="primary">
-          + Add Brands
-        </Button>
+        <AddCars />
       </Box>
     </Box>
   );

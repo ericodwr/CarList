@@ -1,37 +1,39 @@
 import React, { useEffect, useState } from 'react';
 
-import _ from 'lodash';
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 
-import { useHistory } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-import { fetchStream } from '../actions';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getDetailCar } from '../features/cars/cars';
 
-import FormCar from '../components/FormCar';
+const CarDetails = () => {
+  const [formData, setFormData] = useState({});
 
-const CarDetails = (props) => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    props.fetchStream(props.match.params.id);
-  }, []);
+    const fetching = async () => {
+      const { payload } = await dispatch(getDetailCar(id));
+      setFormData(payload);
+    };
+    fetching();
+  }, [dispatch, id]);
 
-  const history = useHistory();
+  console.log(formData);
+
+  if (!formData) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <Box>
       {/* Title */}
       <Box mr="4rem">
-        <Button
-          variant="outlined"
-          onClick={() => {
-            history.push('/');
-          }}
-          sx={{ color: 'black', border: 'none' }}
-        >
+        <Link to={'/'} className="link">
           <Typography
             fontFamily={`'Poppins', sans-serif;`}
             component="h1"
@@ -40,7 +42,7 @@ const CarDetails = (props) => {
           >
             &#60; BRAND DETAILS
           </Typography>
-        </Button>
+        </Link>
       </Box>
 
       {/* Details */}
@@ -61,7 +63,7 @@ const CarDetails = (props) => {
           >
             Brand Logo
           </Typography>
-          <img src={props?.streams?.logo} alt="cars" />
+          <img src={formData?.logo} alt="cars" />
         </Box>
 
         {/* Brand */}
@@ -78,8 +80,9 @@ const CarDetails = (props) => {
             </Typography>
           </Box>
 
-          <Box display="flex">
-            <Box>
+          <Box mt="1.5rem" display="flex">
+            {/* Brand Name */}
+            <Box flexGrow={0.2}>
               <Typography
                 fontFamily={`'Poppins', sans-serif;`}
                 component="h1"
@@ -88,11 +91,16 @@ const CarDetails = (props) => {
               >
                 Brand Name
               </Typography>
-              <TextField
-                id="outlined-basic"
-                value={props?.streams?.name}
-                variant="outlined"
-              />
+              <Box mt="1rem">
+                <Typography
+                  fontFamily={`'Poppins', sans-serif;`}
+                  component="h1"
+                  variant="body1"
+                  fontWeight={'bold'}
+                >
+                  {formData.name}
+                </Typography>
+              </Box>
             </Box>
 
             {/* Status */}
@@ -101,6 +109,7 @@ const CarDetails = (props) => {
                 fontFamily={`'Poppins', sans-serif;`}
                 component="h1"
                 variant="body1"
+                color={'#8C8C8C'}
                 gutterBottom
               >
                 Brand Status
@@ -118,7 +127,7 @@ const CarDetails = (props) => {
                   component="h1"
                   variant="body1"
                 >
-                  {props?.streams?.status ? 'Active' : 'Inactive'}
+                  {formData.status ? 'Active' : 'Inactive'}
                 </Typography>
               </Box>
             </Box>
@@ -131,15 +140,20 @@ const CarDetails = (props) => {
             fontFamily={`'Poppins', sans-serif;`}
             component="h1"
             variant="body1"
+            color={'#8C8C8C'}
           >
             Brand Description
           </Typography>
-          <TextField
-            id="outlined-basic"
-            sx={{ width: '500px' }}
-            value={props?.streams?.desc}
-            variant="outlined"
-          />
+          <Box mt="1rem">
+            <Typography
+              fontFamily={`'Poppins', sans-serif;`}
+              component="h1"
+              variant="body1"
+              fontWeight={'bold'}
+            >
+              {formData.desc}
+            </Typography>
+          </Box>
         </Box>
       </Box>
 
@@ -151,10 +165,4 @@ const CarDetails = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return { streams: state.streams[ownProps.match.params.id] };
-};
-
-export default connect(mapStateToProps, {
-  fetchStream,
-})(CarDetails);
+export default CarDetails;

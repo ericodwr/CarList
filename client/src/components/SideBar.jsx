@@ -61,85 +61,40 @@ export default function SideBar({ children }) {
             flexDirection={'column'}
             justifyContent="space-between"
           >
-            <Box mb="23rem">
-              <ListItem key={'Car'} disablePadding>
-                <ListItemButton
-                  sx={{ backgroundColor: '#0F5EDD', color: 'white' }}
+            <ListItem key={'Car'} disablePadding>
+              <ListItemButton
+                sx={{ backgroundColor: '#0F5EDD', color: 'white' }}
+              >
+                <ListItemIcon>
+                  <img src="/assets/icons/carIcon.svg" alt="car" />
+                </ListItemIcon>
+                <ListItemText primary={'Car Brand'} />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem key={'folder'} disablePadding>
+              <Accordion sx={{ backgroundColor: 'inherit', color: '#8C8C8C' }}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon color="primary" />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
                 >
-                  <ListItemIcon>
-                    <img src="/assets/icons/carIcon.svg" alt="car" />
-                  </ListItemIcon>
-                  <ListItemText primary={'Car Brand'} />
-                </ListItemButton>
-              </ListItem>
-
-              <ListItem key={'Car'} disablePadding>
-                <Accordion
-                  sx={{ backgroundColor: 'inherit', color: '#8C8C8C' }}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon color="primary" />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Box display={'flex'}>
-                      <img src="/assets/icons/pages.svg" alt="pages" />
-                      <Typography mx="2rem">Folder</Typography>
-                    </Box>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>Menu Item</Typography>
-                  </AccordionDetails>
-                  <AccordionDetails>
-                    <Typography>Menu Item</Typography>
-                  </AccordionDetails>
-                  <AccordionDetails>
-                    <Typography>Menu Item</Typography>
-                  </AccordionDetails>
-                </Accordion>
-              </ListItem>
-
-              {/* tasks */}
-              <ListItem key={'Car'} disablePadding>
-                <ListItemButton sx={{ color: '#8C8C8C' }}>
-                  <ListItemIcon>
-                    <img src="/assets/icons/pages.svg" alt="car" />
-                  </ListItemIcon>
-                  <ListItemText primary={'Car Brand'} />
-                </ListItemButton>
-              </ListItem>
-
-              {/* Modules */}
-              <ListItem key={'Car'} disablePadding>
-                <ListItemButton sx={{ color: '#8C8C8C' }}>
-                  <ListItemIcon>
-                    <img src="/assets/icons/pages.svg" alt="car" />
-                  </ListItemIcon>
-                  <ListItemText primary={'Modules'} />
-                </ListItemButton>
-              </ListItem>
-              {/* tasks */}
-              <ListItem key={'Car'} disablePadding>
-                <ListItemButton sx={{ color: '#8C8C8C' }}>
-                  <ListItemIcon>
-                    <img src="/assets/icons/pages.svg" alt="car" />
-                  </ListItemIcon>
-                  <ListItemText primary={'Notification'} />
-                </ListItemButton>
-              </ListItem>
-            </Box>
-            <Box>
-              {/* Settings */}
-              <Divider sx={{ backgroundColor: 'white' }} />
-              <ListItem key={'Car'} disablePadding>
-                <ListItemButton sx={{ color: '#8C8C8C' }}>
-                  <ListItemIcon>
-                    <img src="/assets/icons/settings.svg" alt="car" />
-                  </ListItemIcon>
-                  <ListItemText primary={'Settings'} />
-                </ListItemButton>
-              </ListItem>
-            </Box>
+                  <Box display={'flex'}>
+                    <img src="/assets/icons/pages.svg" alt="pages" />
+                    <Typography mx="2rem">Folder</Typography>
+                  </Box>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>Menu Item</Typography>
+                </AccordionDetails>
+                <AccordionDetails>
+                  <Typography>Menu Item</Typography>
+                </AccordionDetails>
+                <AccordionDetails>
+                  <Typography>Menu Item</Typography>
+                </AccordionDetails>
+              </Accordion>
+            </ListItem>
           </Box>
         </List>
       </Drawer>

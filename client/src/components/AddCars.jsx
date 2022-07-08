@@ -11,8 +11,12 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import uniqid from 'uniqid';
 
 import CloseIcon from '@mui/icons-material/Close';
+
+import { useDispatch } from 'react-redux';
+import { addCars } from '../features/cars/cars';
 
 const BackdropUnstyled = React.forwardRef((props, ref) => {
   const { open, className, ...other } = props;
@@ -53,12 +57,17 @@ const Backdrop = styled(BackdropUnstyled)`
   -webkit-tap-highlight-color: transparent;
 `;
 
-export default function AddCars() {
+export default function AddCars({ setUpdated }) {
   const [open, setOpen] = React.useState(false);
+
+  const update = uniqid();
+
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     image: 'default',
     name: '',
+    models: '1203 models',
     status: true,
     desc: '',
   });
@@ -75,13 +84,17 @@ export default function AddCars() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    dispatch(addCars(formData));
     setFormData({
       image: 'default',
       name: '',
+      models: '1203 models',
       status: true,
       desc: '',
     });
+    handleClose();
+    setUpdated(update);
     console.log('Success');
   };
 

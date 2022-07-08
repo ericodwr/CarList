@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import CarListFunc from '../components/CarListFunc';
@@ -10,17 +10,18 @@ import CarBrand from '../components/CarBrand';
 import { getCars } from '../features/cars/cars';
 
 const CarList = () => {
+  const [updated, setUpdated] = useState(null);
+
   const { cars } = useSelector((state) => state.cars);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCars());
-  }, [dispatch]);
-
+  }, [dispatch, updated]);
 
   return (
     <Box>
-      <CarListFunc />
+      <CarListFunc setUpdated={setUpdated} />
 
       {cars?.map((car) => (
         <CarBrand data={car} key={car.id} />

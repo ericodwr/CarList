@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import uniqid from 'uniqid';
 import axios from 'axios';
 
 const url = `http://localhost:3001/cars`;
@@ -28,11 +29,21 @@ export const getDetailCar = createAsyncThunk('/cars/:name', async (id) => {
   }
 });
 
+export const addCars = createAsyncThunk('/cars', async (formData) => {
+  const id = uniqid();
+  try {
+    axios.post(`${url}`, { ...formData, id });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 const carsSlice = createSlice({
   name: 'cars',
   initialState,
   reducers: {
-    clearCars: (state) => {
+    clearCars: (state, action) => {
+      console.log(action);
       state.cars = [];
     },
   },

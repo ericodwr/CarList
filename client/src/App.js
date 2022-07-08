@@ -7,10 +7,19 @@ import SideBar from './components/SideBar';
 import CarList from './pages/CarList';
 import Error from './pages/Error';
 
+// import { useDispatch } from 'react-redux';
+// import { getCars } from './features/cars/cars';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CarDetails from './pages/CarDetails';
 
 const App = () => {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getCars());
+  // }, [dispatch]);
+
   return (
     <div>
       <SideBar>

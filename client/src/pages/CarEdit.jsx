@@ -3,14 +3,20 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
 import { useParams, Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetailCar } from '../features/cars/cars';
+import { getDetailCar, updateCars } from '../features/cars/cars';
 
-const CarDetails = () => {
+import SnackBars from '../components/SnackBars';
+
+const CarEdit = () => {
   const [formData, setFormData] = useState({});
+  const [open, setOpen] = useState(false);
 
   const { detailCar } = useSelector((state) => state.cars);
 
@@ -28,6 +34,19 @@ const CarDetails = () => {
     setFormData(detailCar);
   }, [detailCar]);
 
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    dispatch(updateCars(formData));
+    setOpen(true);
+    e.preventDefault();
+  };
+
   if (!formData) {
     return <h1>Loading...</h1>;
   }
@@ -36,14 +55,14 @@ const CarDetails = () => {
     <Box>
       {/* Title */}
       <Box mr="4rem">
-        <Link to={'/'} className="link">
+        <Link to={`/cars/${id}`} className="link">
           <Typography
             fontFamily={`'Poppins', sans-serif;`}
             component="h1"
             variant="h5"
             fontWeight={'bold'}
           >
-            &#60; BRAND DETAILS
+            &#60; EDIT BRAND DETAILS
           </Typography>
         </Link>
       </Box>
@@ -54,6 +73,8 @@ const CarDetails = () => {
         display="flex"
         flexDirection="column"
         height="70vh"
+        component={'form'}
+        onSubmit={handleSubmit}
       >
         {/* Logo */}
         <Box>
@@ -95,14 +116,13 @@ const CarDetails = () => {
                 Brand Name
               </Typography>
               <Box mt="1rem">
-                <Typography
-                  fontFamily={`'Poppins', sans-serif;`}
-                  component="h1"
-                  variant="body1"
-                  fontWeight={'bold'}
-                >
-                  {formData.name}
-                </Typography>
+                <TextField
+                  required
+                  id="outlined-required"
+                  value={formData.name ? formData.name : ''}
+                  name="name"
+                  onChange={handleChange}
+                />
               </Box>
             </Box>
 
@@ -119,19 +139,22 @@ const CarDetails = () => {
               </Typography>
               <Box
                 display={'flex'}
-                bgcolor="#CEF7E2"
-                p="0.5rem"
-                borderRadius={'15px'}
                 alignItems="center"
                 justifyContent={'center'}
               >
-                <Typography
-                  fontFamily={`'Poppins', sans-serif;`}
-                  component="h1"
-                  variant="body1"
-                >
-                  {formData.status ? 'Active' : 'Inactive'}
-                </Typography>
+                {/* Error causes controlled / uncontrolled but still works */}
+                <FormControl fullWidth>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="status"
+                    value={formData?.status ? formData.status : ''}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={true}>Active</MenuItem>
+                    <MenuItem value={false}>Inactive</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
             </Box>
           </Box>
@@ -148,26 +171,35 @@ const CarDetails = () => {
             Brand Description
           </Typography>
           <Box mt="1rem">
-            <Typography
-              fontFamily={`'Poppins', sans-serif;`}
-              component="h1"
-              variant="body1"
-              fontWeight={'bold'}
-            >
-              {formData.desc}
-            </Typography>
+            <TextField
+              required
+              multiline
+              rows={4}
+              sx={{
+                width: '80vh',
+              }}
+              id="outlined-required"
+              value={formData.desc}
+              name="desc"
+              onChange={handleChange}
+            />
           </Box>
         </Box>
+        <Box>
+          {/* Button */}
+          <Button type="submit" variant="contained" color="primary">
+            Save Changes
+          </Button>
+        </Box>
       </Box>
-
-      {/* Button */}
-      <Button variant="contained" color="primary">
-        <Link className="link" to={`/cars/${id}/edit`}>
-          Edit Information
-        </Link>
-      </Button>
+      <SnackBars
+        open={open}
+        setOpen={setOpen}
+        text={'Save Success!'}
+        severity="success"
+      />
     </Box>
   );
 };
 
-export default CarDetails;
+export default CarEdit;

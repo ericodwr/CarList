@@ -8,9 +8,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import CarBrand from '../components/CarBrand';
 
 import { getCars } from '../features/cars/cars';
+import SnackBars from '../components/SnackBars';
 
 const CarList = () => {
   const [updated, setUpdated] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const { cars } = useSelector((state) => state.cars);
   const dispatch = useDispatch();
@@ -24,8 +26,20 @@ const CarList = () => {
       <CarListFunc setUpdated={setUpdated} />
 
       {cars?.map((car) => (
-        <CarBrand data={car} key={car.id} setUpdated={setUpdated} />
+        <CarBrand
+          setOpen={setOpen}
+          open={open}
+          data={car}
+          key={car.id}
+          setUpdated={setUpdated}
+        />
       ))}
+      <SnackBars
+        text={'Car Deleted'}
+        open={open}
+        setOpen={setOpen}
+        severity="error"
+      />
     </Box>
   );
 };

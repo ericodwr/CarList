@@ -14,7 +14,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 200;
 
@@ -54,7 +57,9 @@ export default function SideBar({ children }) {
         anchor="left"
       >
         <Box m="1rem">
-          <img src="/assets/logo/ucars.svg" alt="ucars" />
+          <Link to={'/'}>
+            <img src="/assets/logo/ucars.svg" alt="ucars" />
+          </Link>
         </Box>
         <List sx={{ mx: '1rem', mt: '0.5rem' }}>
           <Box

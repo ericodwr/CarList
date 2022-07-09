@@ -17,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { useDispatch } from 'react-redux';
 import { addCars } from '../features/cars/cars';
+import SnackBars from './SnackBars';
 
 const BackdropUnstyled = React.forwardRef((props, ref) => {
   const { open, className, ...other } = props;
@@ -60,6 +61,8 @@ const Backdrop = styled(BackdropUnstyled)`
 export default function AddCars({ setUpdated }) {
   const [open, setOpen] = React.useState(false);
 
+  const [openSnack, setOpenSnack] = useState(false);
+
   const update = uniqid();
 
   const dispatch = useDispatch();
@@ -95,6 +98,8 @@ export default function AddCars({ setUpdated }) {
       desc: '',
     });
     handleClose();
+
+    setOpenSnack(true);
     setUpdated(update);
     console.log('Success');
   };
@@ -295,6 +300,12 @@ export default function AddCars({ setUpdated }) {
           </Box>
         </Fade>
       </Modal>
+      <SnackBars
+        open={openSnack}
+        setOpen={setOpenSnack}
+        text={'Success Adding New Car!'}
+        severity="success"
+      />
     </div>
   );
 }

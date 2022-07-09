@@ -22,7 +22,7 @@
       "logo": "/assets/logo/mazda.svg",
       "name": "Mazda",
       "desc": "Audi Q7",
-      "date": "25/12/2022",
+      "date": "7/9/2022",
       "models": "620 Models",
       "status": true,
       "id": 3
@@ -48,11 +48,22 @@
     {
       "logo": "/assets/logo/nissan.svg",
       "name": "Nissan",
-      "date": "25/12/2022",
+      "date": "7/9/2022",
       "desc": "Brand description too long...",
       "models": "4260 Models",
       "status": false,
-      "id": 6
+      "id": 6,
+      "requestId": "hv1MThLEYMppC0inZ4Eca",
+      "signal": {}
+    },
+    {
+      "image": "default",
+      "name": "OCIREX",
+      "date": "7/9/2022",
+      "models": "1203 models",
+      "status": true,
+      "desc": "THE QUICK! AND THE FASTEST!",
+      "id": "l5dqji5p"
     }
   ]
 }

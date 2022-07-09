@@ -53,33 +53,6 @@
       "models": "4260 Models",
       "status": false,
       "id": 6
-    },
-    {
-      "image": "default",
-      "name": "Ocire",
-      "date": "7/9/2022",
-      "models": "1203 models",
-      "status": true,
-      "desc": "this is a big big project",
-      "id": "l5cs2979"
-    },
-    {
-      "image": "default",
-      "name": "delete",
-      "date": "7/9/2022",
-      "models": "1203 models",
-      "status": true,
-      "desc": "updating delete function",
-      "id": "l5dg2few"
-    },
-    {
-      "image": "default",
-      "name": "erc",
-      "models": "1203 models",
-      "status": true,
-      "desc": "brand new",
-      "id": "l5dg2r8o",
-      "date": "7/9/2022"
     }
   ]
 }

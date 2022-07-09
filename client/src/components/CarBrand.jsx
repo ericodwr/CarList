@@ -3,19 +3,32 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+
+import ClearIcon from '@mui/icons-material/Clear';
+
+import uniqid from 'uniqid';
 
 import { Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { deleteCars, deleteCarReducer } from '../features/cars/cars';
 
-const CarBrand = ({ data }) => {
+const CarBrand = ({ data, setUpdated }) => {
   const { name, logo, desc, models, status, date, id } = data;
 
   const dispatch = useDispatch();
 
-  // deleteCars for actually remove data from database
-  // deleteCarReducer only delete from the redux data
+  const handleDelete = (id) => {
+    // Keep the default data in database
+    if (typeof id === 'number') {
+      return dispatch(deleteCarReducer(id));
+    } else {
+      // Delete the new data in database
+      setUpdated(uniqid);
+      return dispatch(deleteCars(id));
+    }
+  };
 
   return (
     <Box
@@ -28,7 +41,6 @@ const CarBrand = ({ data }) => {
       <Box flex={0.5}>
         <img src={logo} alt={name} />
       </Box>
-      <button onClick={() => dispatch(deleteCarReducer(id))}>delete</button>
 
       {/* Name and Desc */}
       <Box flex={2}>
@@ -107,11 +119,25 @@ const CarBrand = ({ data }) => {
       </Box>
 
       {/* View Details */}
-      <Button variant="outlined" color="inherit">
+      <Button
+        size="small"
+        sx={{ mr: '2rem' }}
+        variant="outlined"
+        color="inherit"
+      >
         <Link className="link" to={`/cars/${id}`}>
           View Details
         </Link>
       </Button>
+
+      {/* Delete Data */}
+      <IconButton
+        onClick={() => handleDelete(id)}
+        variant="outlined"
+        color="error"
+      >
+        <ClearIcon />
+      </IconButton>
     </Box>
   );
 };

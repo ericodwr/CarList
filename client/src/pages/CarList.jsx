@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import CarBrand from '../components/CarBrand';
 
-import { getCars } from '../features/cars/cars';
+import { getCars, clearCars } from '../features/cars/cars';
 
 const CarList = () => {
   const [updated, setUpdated] = useState(null);
@@ -23,6 +23,7 @@ const CarList = () => {
     <Box>
       <CarListFunc setUpdated={setUpdated} />
 
+      <button onClick={() => dispatch(clearCars())}>clear</button>
       {cars?.map((car) => (
         <CarBrand data={car} key={car.id} />
       ))}

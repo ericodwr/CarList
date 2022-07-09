@@ -67,6 +67,7 @@ export default function AddCars({ setUpdated }) {
   const [formData, setFormData] = useState({
     image: 'default',
     name: '',
+    date: '',
     models: '1203 models',
     status: true,
     desc: '',
@@ -231,7 +232,7 @@ export default function AddCars({ setUpdated }) {
                           onChange={handleChange}
                         >
                           <MenuItem value={true}>Active</MenuItem>
-                          <MenuItem value={false}>False</MenuItem>
+                          <MenuItem value={false}>Inactive</MenuItem>
                         </Select>
                       </FormControl>
                     </Box>

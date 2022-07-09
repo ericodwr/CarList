@@ -6,26 +6,24 @@ import Button from '@mui/material/Button';
 
 import { useParams, Link } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
-import { getDetailCar, clearCars } from '../features/cars/cars';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetailCar } from '../features/cars/cars';
 
 const CarDetails = () => {
   const [formData, setFormData] = useState({});
 
+  const { detailCar } = useSelector((state) => state.cars);
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  console.log(dispatch(clearCars()));
-
   useEffect(() => {
     const fetching = async () => {
-      const { payload } = await dispatch(getDetailCar(id));
-      setFormData(payload);
+      await dispatch(getDetailCar(id));
+      setFormData(detailCar);
     };
     fetching();
-  }, [dispatch, id]);
-
-  console.log(formData);
+  }, [dispatch, id, detailCar]);
 
   if (!formData) {
     return <h1>Loading...</h1>;

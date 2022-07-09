@@ -16,7 +16,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 export default function SideBar({ children }) {
   return (
@@ -53,9 +53,10 @@ export default function SideBar({ children }) {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
-        <Divider sx={{ backgroundColor: 'white' }} />
-        <List sx={{ mx: '1rem' }}>
+        <Box m="1rem">
+          <img src="/assets/logo/ucars.svg" alt="ucars" />
+        </Box>
+        <List sx={{ mx: '1rem', mt: '0.5rem' }}>
           <Box
             display="flex"
             flexDirection={'column'}
@@ -72,7 +73,7 @@ export default function SideBar({ children }) {
               </ListItemButton>
             </ListItem>
 
-            <ListItem key={'folder'} disablePadding>
+            <ListItem sx={{ my: '0.5rem' }} key={'folder'} disablePadding>
               <Accordion sx={{ backgroundColor: 'inherit', color: '#8C8C8C' }}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon color="primary" />}
@@ -94,6 +95,40 @@ export default function SideBar({ children }) {
                   <Typography>Menu Item</Typography>
                 </AccordionDetails>
               </Accordion>
+            </ListItem>
+
+            {/* Tasks */}
+            <ListItem sx={{ my: '0.5rem' }} key={'tasks'} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <img src="/assets/icons/pages.svg" alt="car" />
+                </ListItemIcon>
+                <ListItemText primary={'Tasks'} />
+              </ListItemButton>
+            </ListItem>
+
+            {/* Modules */}
+            <ListItem sx={{ my: '0.5rem' }} key={'modules'} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <img src="/assets/icons/pages.svg" alt="car" />
+                </ListItemIcon>
+                <ListItemText primary={'Modules'} />
+              </ListItemButton>
+            </ListItem>
+
+            {/* Notifications */}
+            <ListItem
+              sx={{ my: '0.5rem' }}
+              key={'notifications'}
+              disablePadding
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <img src="/assets/icons/pages.svg" alt="car" />
+                </ListItemIcon>
+                <ListItemText primary={'Notification'} />
+              </ListItemButton>
             </ListItem>
           </Box>
         </List>

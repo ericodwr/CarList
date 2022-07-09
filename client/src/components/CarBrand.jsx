@@ -6,8 +6,17 @@ import Button from '@mui/material/Button';
 
 import { Link } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { deleteCars, deleteCarReducer } from '../features/cars/cars';
+
 const CarBrand = ({ data }) => {
   const { name, logo, desc, models, status, date, id } = data;
+
+  const dispatch = useDispatch();
+
+  // deleteCars for actually remove data from database
+  // deleteCarReducer only delete from the redux data
+
   return (
     <Box
       display="flex"
@@ -19,6 +28,7 @@ const CarBrand = ({ data }) => {
       <Box flex={0.5}>
         <img src={logo} alt={name} />
       </Box>
+      <button onClick={() => dispatch(deleteCarReducer(id))}>delete</button>
 
       {/* Name and Desc */}
       <Box flex={2}>
@@ -42,7 +52,7 @@ const CarBrand = ({ data }) => {
             variant="body1"
             mr="1rem"
           >
-            {desc}
+            {desc.length > 15 ? `${desc.substring(0, 15)}...` : desc}
           </Typography>
           |
           <Typography

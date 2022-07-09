@@ -20,7 +20,7 @@ export const getCars = createAsyncThunk('cars/getCars', async () => {
   }
 });
 
-export const getDetailCar = createAsyncThunk('/cars/:name', async (id) => {
+export const getDetailCar = createAsyncThunk('/cars/:id', async (id) => {
   try {
     const response = await axios.get(`${url}/${id}`);
     return response.data;
@@ -31,8 +31,18 @@ export const getDetailCar = createAsyncThunk('/cars/:name', async (id) => {
 
 export const addCars = createAsyncThunk('/cars', async (formData) => {
   const id = uniqid();
+  const date = new Date().toLocaleDateString();
   try {
-    axios.post(`${url}`, { ...formData, id });
+    axios.post(`${url}`, { ...formData, id, date });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const deleteCars = createAsyncThunk('/cars/delete', async (id) => {
+  try {
+    await axios.delete(`${url}/${id}`);
+    console.log('success');
   } catch (error) {
     console.log(error);
   }
@@ -46,14 +56,28 @@ const carsSlice = createSlice({
       console.log(action);
       state.cars = [];
     },
+    deleteCarReducer: (state, { payload }) => {
+      state.cars = state.cars.filter((car) => car.id !== payload);
+    },
+    // deleteCars: (state, action) =>
+    //   createAsyncThunk('/cars/delete', async () => {
+    //     try {
+    //       await axios.delete(`${url}/${action.payload}`);
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   }),
   },
   extraReducers: {
     [getCars.fulfilled]: (state, action) => {
       state.cars = action.payload;
     },
+    [getDetailCar.fulfilled]: (state, action) => {
+      state.detailCar = action.payload;
+    },
   },
 });
 
-export const { clearCars } = carsSlice.actions;
+export const { clearCars, getDetail, deleteCarReducer } = carsSlice.actions;
 
 export default carsSlice.reducer;
